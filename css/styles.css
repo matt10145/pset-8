@@ -11,11 +11,6 @@ h1 {
     margin: 2%;
 }
 
-/*
-* The subheader (which let's us know whose turn it is) is a little smaller
-* and less prominent.
-*/
-
 h2 {
     font-size: 36px;
     font-weight: lighter;
@@ -33,30 +28,17 @@ h2 {
     align-items: center;          /* center content vertically */
 }
 
-/*
-* We want to display the subheader, board, and reset button in a single
-* vertical column.
-*/
-
 .column {
     height: 100%;
     width: 100%;
     flex-direction: column; /* align children in columns instead of rows */
 }
 
-/*
-* This ensures that we get three rows of three squares, rather than a single
-* row of nine squares.
-*/
 .wrap {
     flex-wrap: wrap; /* tells container to drop down once it reaches max-width */
     height: 456px;
     width: 456px;
 }
-
-/*
-* The square itself. We give it a specific size and border.
-*/
 
 .square {
     border: 1px solid rgba(0, 0, 0, 0.75);
@@ -64,10 +46,6 @@ h2 {
     user-select: none;
     width: 150px;
 }
-
-/*
-* And we give it a little flare when the user mouses over a square.
-*/
 
 .square:hover {
     background-color: lightgray;
