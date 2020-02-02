@@ -25,6 +25,7 @@ const turnUpdate = document.querySelector("h2");
 ///// EVENT LISTENERS /////
 window.onload = init;
 document.getElementById("board").onclick = takeTurn;
+document.getElementById("reset-button").onclick = init;
 
 ///// FUNCTIONS /////
 
@@ -51,12 +52,12 @@ function render() {
         squares[index].textContent = mark;
     });
 
-    turnUpdate.textContent = win ? `${win} WINS` : `TURN: ${turn}`;
+    turnUpdate.textContent = win === "T" ? `TIE GAME` : win ? `${win} WINS` : `TURN: ${turn}`;
 }
 
 /**
  * Alternates between placing an X or an O on the physical board, depending on the turn state of the game. 
- * @param event The HTML element being targeted.  
+ * @param event The targeted HTML element
  */
 function takeTurn(event) {
     let index;
@@ -73,6 +74,12 @@ function takeTurn(event) {
     render();
 }
 
+/**
+ * Loops through the board array and checks against each of the programmed win conditions.
+ * Checks whether winner is defined, and then whether the board has been completely filled. Winner is then assigned
+ * a value accordingly.
+ * @return Either "X", "O", "T", or null, depending on the value of winner. 
+ */
 function getWinner() {
     let winner = null;
 
@@ -86,5 +93,6 @@ function getWinner() {
         }
     });
 
-    return winner;
+    
+    return winner ? winner : board.includes("") ? null : "T";
 }
