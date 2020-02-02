@@ -10,17 +10,17 @@ const winningConditions = [
     [2, 5, 6]
 ];
 
-
-
 ///// APP STATE (VARIABLES) /////
 let board;
 let turn;
 let win;
+let xScore = 0;
+let yScore = 0;
 
 ///// CACHED ELEMENT REFERENCES /////
 const squares = Array.from(document.querySelectorAll("#board div"));
 const turnUpdate = document.querySelector("h2");
-
+const scores = document.getElementById("scorekeeper");
 
 ///// EVENT LISTENERS /////
 window.onload = init;
@@ -30,7 +30,7 @@ document.getElementById("reset-button").onclick = init;
 ///// FUNCTIONS /////
 
 /**
- * Function that runs on page startup to render the board.
+ * Function that runs on page startup to assign variable values and render the board.
  */
 function init() {
     board = [
@@ -52,6 +52,7 @@ function render() {
         squares[index].textContent = mark;
     });
 
+    scores.textContent = `X TOTAL WINS: ${xScore} | Y TOTAL WINS: ${yScore}`;
     turnUpdate.textContent = win === "T" ? `TIE GAME` : win ? `${win} WINS` : `TURN: ${turn}`;
 }
 
@@ -67,11 +68,13 @@ function takeTurn(event) {
         });
     }
 
-    board[index] = turn;
-    turn = turn === "X" ? "O" : "X";
-    win = getWinner();
+    if (board[index] === "") {
+        board[index] = turn;
+        turn = turn === "X" ? "O" : "X";
+        win = getWinner();
 
-    render();
+        render();
+    }
 }
 
 /**
@@ -90,9 +93,14 @@ function getWinner() {
             && board[condition[1]] === board[condition[2]]
         ) {
             winner = board[condition[0]];
+            if (winner === "X") {
+                xScore++;
+            }
+            if (winner === "O") {
+                yScore++;
+            }
         }
     });
-
     
     return winner ? winner : board.includes("") ? null : "T";
 }
