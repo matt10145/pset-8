@@ -7,7 +7,7 @@ const winningConditions = [
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 5, 6]
+    [2, 4, 6]
 ];
 
 ///// APP STATE (VARIABLES) /////
@@ -16,21 +16,41 @@ let turn;
 let win;
 let xScore = 0;
 let yScore = 0;
+let started;
 
 ///// CACHED ELEMENT REFERENCES /////
 const squares = Array.from(document.querySelectorAll("#board div"));
-const turnUpdate = document.querySelector("h2");
+const turnChoice = document.getElementById("turnChoice");
+const turnUpdate = document.getElementById("turnUpdate");
 const scores = document.getElementById("scorekeeper");
+const turnButtons = document.getElementById("turnButtons");
 
 ///// EVENT LISTENERS /////
 window.onload = init;
 document.getElementById("board").onclick = takeTurn;
 document.getElementById("reset-button").onclick = init;
 
+function addEventListeners() {
+    turnButtons.addEventListener("click", function(event) {
+        let clicked = event.target;
+
+        if (clicked.id == "xButton") {
+            turn = "X";
+            started = true;
+            render();
+        }
+        if (clicked.id == "oButton") {
+            turn = "O";
+            started = true;
+            render();
+        }
+    });
+}
+
 ///// FUNCTIONS /////
 
 /**
- * Function that runs on page startup to assign variable values and render the board.
+ * Function that runs on page startup to assign variable values and to render the board.
  */
 function init() {
     board = [
@@ -38,9 +58,12 @@ function init() {
         "", "", "",
         "", "", ""
     ];
-    turn = "X";
+    turn = "?";
     win = null;
+    turnState = "choosing";
+    started = false;
 
+    addEventListeners();
     render();
 }
 
@@ -53,7 +76,9 @@ function render() {
     });
 
     scores.textContent = `X TOTAL WINS: ${xScore} | Y TOTAL WINS: ${yScore}`;
-    turnUpdate.textContent = win === "T" ? `TIE GAME` : win ? `${win} WINS` : `TURN: ${turn}`;
+    xButton.textContent = "X";
+    oButton.textContent = "O";
+    turnUpdate.textContent = (win === "T" ? `TIE GAME` : (win ? `${win} WINS` : `TURN: ${turn}`));
 }
 
 /**
@@ -61,19 +86,21 @@ function render() {
  * @param event The targeted HTML element
  */
 function takeTurn(event) {
-    let index;
-    if (!win) {
-        index = squares.findIndex(function(square) {
-            return square === event.target;
-        });
-    }
+    if (started) {
+        let index;
+        if (!win) {
+            index = squares.findIndex(function(square) {
+                return square === event.target;
+            });
+        }
 
-    if (board[index] === "") {
-        board[index] = turn;
-        turn = turn === "X" ? "O" : "X";
-        win = getWinner();
+        if (board[index] === "") {
+            board[index] = turn;
+            turn = turn === "X" ? "O" : "X";
+            win = getWinner();
 
-        render();
+            render();
+        }
     }
 }
 

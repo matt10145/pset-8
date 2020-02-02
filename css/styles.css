@@ -44,6 +44,14 @@ p {
     width: 456px;
 }
 
+.barrier {
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 110px; 
+    width: 425px;
+    align-items: center; 
+}
+
 .square {
     border: 1px solid rgba(0, 0, 0, 0.75);
     font-size: 96px;
@@ -56,6 +64,17 @@ p {
 .square:hover {
     background-color: lightgray;
     cursor: pointer;
+}
+
+#turnUpdate {
+    font-size: 25px;
+}
+
+#xButton, #oButton {
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    font-size: 20px;
 }
 
 #reset-button {
