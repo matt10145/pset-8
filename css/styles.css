@@ -77,6 +77,11 @@ p {
     font-size: 20px;
 }
 
+#xButton:hover, #oButton:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
 #reset-button {
     background-color: white;
     border: 1px solid black;
