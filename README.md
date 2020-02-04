@@ -5,7 +5,7 @@ B 3/4
 February 2020
 
 TODO: 
-- disable turn button when in the middle of a match
+- allow players to change their mind (when selecting first turn?)
 
 
 Q'S
