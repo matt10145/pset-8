@@ -14,9 +14,9 @@ const winningConditions = [
 let board;
 let turn;
 let win;
+let started;
 let xScore = 0;
 let yScore = 0;
-let started;
 
 ///// CACHED ELEMENT REFERENCES /////
 const squares = Array.from(document.querySelectorAll("#board div"));
