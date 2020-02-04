@@ -30,6 +30,10 @@ window.onload = init;
 document.getElementById("board").onclick = takeTurn;
 document.getElementById("reset-button").onclick = init;
 
+/**
+ * Runs to check which turn choice button was clicked, and acts accordingly with variables turn
+ * and started.
+ */
 function addEventListeners() {
     turnButtons.addEventListener("click", function(event) {
         let clicked = event.target;
