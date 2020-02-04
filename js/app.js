@@ -74,14 +74,14 @@ function render() {
         squares[index].textContent = mark;
     });
 
-    scores.textContent = `X TOTAL WINS: ${xScore} | Y TOTAL WINS: ${yScore}`;
+    scores.textContent = `X TOTAL WINS: ${xScore} | O TOTAL WINS: ${yScore}`;
     xButton.textContent = "X";
     oButton.textContent = "O";
     turnUpdate.textContent = (win === "T" ? `TIE GAME` : (win ? `${win} WINS` : `TURN: ${turn}`));
 }
 
 /**
- * Alternates between placing an X or an O on the physical board, depending on the turn state of the game. 
+ * Alternates between placing an X or an O on the physical board, depending on the turn state of the game.
  * @param event The targeted HTML element
  */
 function takeTurn(event) {
@@ -107,15 +107,15 @@ function takeTurn(event) {
  * Loops through the board array and checks against each of the programmed win conditions.
  * Checks whether winner is defined, and then whether the board has been completely filled. Winner is then assigned
  * a value accordingly.
- * @return Either "X", "O", "T", or null, depending on the value of winner. 
+ * @return Either "X", "O", "T", or null, depending on the value of winner.
  */
 function getWinner() {
     let winner = null;
 
     winningConditions.forEach(function(condition, index) {
         if (
-            board[condition[0]] && 
-            board[condition[0]] === board[condition[1]] 
+            board[condition[0]] &&
+            board[condition[0]] === board[condition[1]]
             && board[condition[1]] === board[condition[2]]
         ) {
             winner = board[condition[0]];
@@ -127,6 +127,6 @@ function getWinner() {
             }
         }
     });
-    
+
     return winner ? winner : board.includes("") ? null : "T";
 }
