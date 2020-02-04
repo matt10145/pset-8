@@ -34,12 +34,12 @@ function addEventListeners() {
     turnButtons.addEventListener("click", function(event) {
         let clicked = event.target;
 
-        if (clicked.id == "xButton") {
+        if (clicked.id == "xButton" && !started) {
             turn = "X";
             started = true;
             render();
         }
-        if (clicked.id == "oButton") {
+        if (clicked.id == "oButton" && !started) {
             turn = "O";
             started = true;
             render();
@@ -60,7 +60,6 @@ function init() {
     ];
     turn = "?";
     win = null;
-    turnState = "choosing";
     started = false;
 
     addEventListeners();
